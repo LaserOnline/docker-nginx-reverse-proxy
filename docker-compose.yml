@@ -1,0 +1,21 @@
+version: '0.0.1'
+
+services:
+  web:
+    container_name: nginx-example-ex-2
+    image: nginx-reverse-proxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./conf.d:/etc/nginx/conf.d
+      - ./log:/var/log/nginx/
+    networks:
+      - networks-host
+
+networks:
+  networks-host:
+    driver: bridge
